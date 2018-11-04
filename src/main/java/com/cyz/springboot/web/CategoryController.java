@@ -1,11 +1,14 @@
 package com.cyz.springboot.web;
 
 import com.cyz.springboot.dao.CategoryDAO;
+import com.cyz.springboot.dao.HeroDAO;
 import com.cyz.springboot.pojo.Category;
+import com.cyz.springboot.pojo.Hero;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,8 +18,22 @@ import java.util.List;
 public class CategoryController {
     @Autowired
     CategoryDAO categoryDAO;
+    @Autowired
+    HeroDAO heroDAO;
 
-    @RequestMapping("/hello")
+    @RequestMapping("/add")
+    @ResponseBody
+    public String add(){
+        for (int i = 0; i < 100; i++) {
+            Hero hero = new Hero();
+            hero.setName("hero"+i);
+            hero.setHp(6000+i);
+            heroDAO.save(hero);
+        }
+        return "success";
+    }
+
+    @RequestMapping("/hello ")
     public String hello(Model model){
         model.addAttribute("name","thymeleaf");
         boolean b = true;
