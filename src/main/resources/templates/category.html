@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+        <link rel="stylesheet" type="text/css" media="all"  th:href="@{/static/css/style.css}"/>
+        <script type="text/javascript"  th:src="@{/static/js/thymeleaf.js}"></script>
+        <script>
+        </script>
+
+        </head>
+        <body>
+        <div class="showing">
+                <p th:text="${name}">name</p>
+                <p th:if="${testBoolean}" th:text="${ name}">有问题么</p>
+                <p th:text="${htmlContent}"></p>
+                <p th:utext="${htmlContent}"></p>
+        </div>
+        <p th:text="${#dates.format(now)}"></p>
+
+        <div class="showing" th:object="${a1}">
+            <p th:text="*{name}"></p>
+            <div th:each="p,status:${cs}">
+                <p th:text="${p.name}"></p>
+                <p th:text="${status.index+'次序'}"></p>
+            </div>
+        </div>
+        <select size="10">
+            <option th:each="p,status:${cs}" th:value="${status.index}" th:selected="${status.index}" th:text="${p.getName()}">
+            </option>
+        </select>
+        <div class="showing">
+        <div th:replace="include::footer1"></div>
+        <div th:replace="include::footer2(2015,2018)"></div>
+        </div>
+</body>
+</html>
